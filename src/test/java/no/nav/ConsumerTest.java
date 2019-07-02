@@ -22,14 +22,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(PactConsumerTestExt.class)
 //@PactTestFor(providerName = "ArticlesProvider",port = "9095")
-@PactTestFor(port = "9095")
+//@PactTestFor(port = "9095")
+@PactTestFor(providerName = "ArticlesProvider")
 public class ConsumerTest {
 
     private Map<String, String> headers = MapUtils.putAll(new HashMap<>(), new String[]{
             "Content-Type", "application/json"
     });
 
-    @Pact(provider = "ArticlesProvider", consumer = "ArticlesConsumer")
+    @Pact(consumer = "ArticlesConsumer")
     public RequestResponsePact articles(PactDslWithProvider builder) {
 
         final DslPart body = new PactDslJsonBody()
@@ -69,7 +70,7 @@ public class ConsumerTest {
     }
 
 
-    @Pact(provider = "ArticlesProvider", consumer = "ArticlesConsumer")
+    @Pact(consumer = "ArticlesConsumer")
     public RequestResponsePact person(PactDslWithProvider builder) {
 
         final DslPart body = new PactDslJsonBody()
